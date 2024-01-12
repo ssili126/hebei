@@ -42,11 +42,5 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.0.0
         with:
-          name: iptv_hebei.txt
-          path: /home/runner/work/iptv-hebei/iptv-hebei/
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4.0.0
-        with:
-          name: iptv_hebei.txt
+          name: iptv-hebei.txt
           path: /home/runner/work/iptv-hebei/iptv-hebei/
