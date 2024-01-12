@@ -76,7 +76,7 @@ for url in urls:
                     name = name.replace("CCTV16奥林匹克", "CCTV16")
                     name = name.replace("CCTV17农业农村", "CCTV17")
                     name = name.replace("CCTV5+体育赛视", "CCTV5+")
-                    name = name.replace("CCTV5+体育赛事"， "CCTV5+")
+                    name = name.replace("CCTV5+体育赛事", "CCTV5+")
                     results.append(f"{name},{urld}")
     except requests.exceptions.RequestException as e:
         print(f"Failed to process JSON for URL {json_url}. Error: {str(e)}")
