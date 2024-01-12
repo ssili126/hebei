@@ -34,11 +34,8 @@ jobs:
           sudo chmod +x /usr/local/bin/chromedriver
           rm chromedriver_linux64.zip
 
-      - name: Copy script file
-        run: cp IPTV-hebei.py ${{ github.workspace }}
-
       - name: Run script
-        run: python ./IPTV-hebei.py
+        run: python ${{ github.workspace }}/IPTV-hebei.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
