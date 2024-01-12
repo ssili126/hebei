@@ -26,8 +26,8 @@ driver.quit()
 
 # 查找所有符合指定格式的网址
 pattern = r"http://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+"  # 设置匹配的格式，如http://8.8.8.8:8888
-urls = re.findall(pattern, page_content)
-#print(urls)
+urls_all = re.findall(pattern, page_content)
+urls = list(set(urls_all))  # 去重得到唯一的URL列表
 # 遍历网址列表，获取JSON文件并解析
 results = []
 for url in urls:
@@ -73,7 +73,7 @@ for url in urls:
                     name = name.replace("CCTV13新闻", "CCTV13")
                     name = name.replace("CCTV14少儿", "CCTV14")
                     name = name.replace("CCTV15音乐", "CCTV15")
-                    name = name.replace("CCTV16奥林匹克", "CCTV16")
+                    name = name.replace("CCTV16奥林匹克"， "CCTV16")
 
                     name = name.replace("CCTV17农业农村", "CCTV17")
                     name = name.replace("CCTV5+体育赛视", "CCTV5+")
