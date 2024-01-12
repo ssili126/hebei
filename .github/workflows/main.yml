@@ -32,12 +32,10 @@ jobs:
           curl -sS -o chromedriver_linux64.zip "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/120.0.6099.109/linux64/chrome-headless-shell-linux64.zip"
           sudo unzip chromedriver_linux64.zip -d /usr/local/bin
           rm chromedriver_linux64.zip
-
       - name: Set chromedriver path
         run: |
           sudo ln -sf /usr/local/bin/chrome-headless-shell-linux64/chrome-headless-shell /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
-
       - name: Run script
         run: python ${{ github.workspace }}/IPTV-hebei.py
 
@@ -46,8 +44,13 @@ jobs:
         with:
           name: iptv_hebei_output
           path: ${{ github.workspace }}
-          
+
       - name: Download artifact
         uses: actions/download-artifact@v4.0.0
         with:
           name: iptv_hebei_output
+
+      - name: Move artifact files to root
+        run: |
+          mv ${{ github.workspace }}/iptv_hebei_output/* ${{ github.workspace }}
+          rm -rf ${{ github.workspace }}/iptv_hebei_output
