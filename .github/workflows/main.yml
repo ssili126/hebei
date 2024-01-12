@@ -10,19 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clear Cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node16-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node16-
-      
-      - name: Set up Node.js 16.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -40,7 +27,7 @@ jobs:
           rm chromedriver_linux64.zip
 
       - name: Run script
-        run: python your_script_name.py
+        run: python IPTV-hebei.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
