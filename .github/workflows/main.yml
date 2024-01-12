@@ -1,0 +1,36 @@
+name: IPTV Hebei
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install selenium requests
+
+      - name: Install Chrome WebDriver
+        run: |
+          LATEST_CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          curl -sS -o chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          sudo unzip chromedriver_linux64.zip -d /usr/local/bin
+          sudo chmod +x /usr/local/bin/chromedriver
+          rm chromedriver_linux64.zip
+
+      - name: Run script
+        run: python your_script_name.py
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: iptv_hebei_output
+          path: iptv_hebei.txt
