@@ -32,7 +32,7 @@ jobs:
           rm chromedriver_linux64.zip
 
       - name: Run script
-        run: python IPTV-hebei.py
+        run: python ./IPTV-hebei.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
