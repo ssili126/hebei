@@ -42,15 +42,10 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.0.0
         with:
-          name: iptv_hebei_output
+          name: iptv_hebei.txt
           path: ${{ github.workspace }}
 
       - name: Download artifact
         uses: actions/download-artifact@v4.0.0
         with:
-          name: iptv_hebei_output
-
-      - name: Move artifact files to root
-        run: |
-          mv ${{ github.workspace }}/iptv_hebei_output/* ${{ github.workspace }}
-          rm -rf ${{ github.workspace }}/iptv_hebei_output
+          name: iptv_hebei.txt
