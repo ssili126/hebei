@@ -2,6 +2,8 @@ name: IPTV Hebei
 
 on:
   push:
+    schedule:
+    - cron: "0 * * * *"
     branches:
       - main
 
