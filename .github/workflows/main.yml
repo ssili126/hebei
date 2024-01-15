@@ -46,14 +46,8 @@ jobs:
         with:
           name: iptv-hebei
           path: ${{ github.workspace }}/
-
-      - name: Upload Text File
-        uses: actions/upload-artifact@v4.0.0
-        with:
-          name: iptv_hebei.txt
-          path: ${{ github.workspace }}/iptv_hebei.txt
           
-      - name: Commit changes
+      - name: 提交更改
         run: |
           git config --local user.email "ssili@126.com"
           git config --local user.name "ssili126"
