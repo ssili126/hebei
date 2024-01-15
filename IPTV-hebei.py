@@ -5,8 +5,8 @@ import requests
 import json
 import re
 
-url = "https://www.zoomeye.org/searchResult?q=%2Fiptv%2Flive%2Fzh_cn.js%20%2Bcountry%3A%22CN%22%20%2Bsubdivisions%3A%22%E6%B2%B3%E5%8C%97%22"
-#url = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY291bnRyeT0iQ04iICYmIHJlZ2lvbj0iSGViZWki"
+#url = "https://www.zoomeye.org/searchResult?q=%2Fiptv%2Flive%2Fzh_cn.js%20%2Bcountry%3A%22CN%22%20%2Bsubdivisions%3A%22%E6%B2%B3%E5%8C%97%22"
+url = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY291bnRyeT0iQ04iICYmIHJlZ2lvbj0iSGViZWki"
 
 # 创建一个Chrome WebDriver实例
 chrome_options = Options()
@@ -70,7 +70,7 @@ for url in urls:
                         name = name.replace("CCTV9记录", "CCTV9")
                         name = name.replace("CCTV9纪录", "CCTV9")
                         name = name.replace("CCTV10科教", "CCTV10")
-                        name = name.replace("CCTV11戏曲", "CCTV11")
+                        name = name.replace("CCTV11戏曲"， "CCTV11")
                         name = name.replace("CCTV12社会与法", "CCTV12")
                         name = name.replace("CCTV13新闻", "CCTV13")
                         name = name.replace("CCTV新闻", "CCTV13")
