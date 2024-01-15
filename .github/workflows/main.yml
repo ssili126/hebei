@@ -52,3 +52,11 @@ jobs:
         with:
           name: iptv_hebei.txt
           path: ${{ github.workspace }}/iptv_hebei.txt
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "ssili@126.com"
+          git config --local user.name "ssili126"
+          git add .
+          git commit -m "Add generated file"
+          git push
