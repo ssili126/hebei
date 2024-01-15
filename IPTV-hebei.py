@@ -87,7 +87,7 @@ for url in urls:
         continue
 
 # 将结果保存到文本文件
-with open("iptv_hebei.txt", "w", encoding="utf-8") as file:
+with open("hebei.txt", "w", encoding="utf-8") as file:
     for result in results:
         file.write(result + "\n")
 
