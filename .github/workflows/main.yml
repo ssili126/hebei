@@ -50,4 +50,5 @@ jobs:
           git config --local user.name "ssili126"
           git add .
           git commit -m "Add generated file"
+          git rebase --continue
           git push -f
