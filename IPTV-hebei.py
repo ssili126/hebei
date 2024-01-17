@@ -92,7 +92,4 @@ for url in urls:
 with open("hebei.txt", "w", encoding="utf-8") as file:
     for result in results:
         file.write(result + "\n")
-
-# 打印结果
-#for result in results:
-    #print(result)
+        print(result)
