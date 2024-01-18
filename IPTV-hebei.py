@@ -59,6 +59,7 @@ def process_url(url):
                             name = name.replace("-", "")
                             name = name.replace(" ", "")
                             name = name.replace("PLUS", "+")
+                            name = name.replace("＋", "+")
                             name = name.replace("(", "")
                             name = name.replace(")", "")
                             name = name.replace("CCTV1综合", "CCTV1")
