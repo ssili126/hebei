@@ -50,5 +50,5 @@ jobs:
           git config --local user.name "ssili126"
           git add .
           git commit *.txt -m "Add generated file"
-          git pull
-          git push
+          #git pull
+          git push -f
