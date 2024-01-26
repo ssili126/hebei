@@ -1,4 +1,5 @@
 import time
+import concurrent.futures
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import requests
@@ -6,8 +7,10 @@ import json
 import re
 
 
-hebei = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY291bnRyeT0iQ04iICYmIHJlZ2lvbj0iSGViZWki"        #河北
-cn = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY291bnRyeT0iQ04iICYmIHJlZ2lvbj0ic2hhbmRvbmci"   #cn
+#hebei = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY291bnRyeT0iQ04iICYmIHJlZ2lvbj0iSGViZWki"        #河北
+#cn = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY291bnRyeT0iQ04iICYmIHJlZ2lvbj0ic2hhbmRvbmci"   #山东
+hebei = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY2l0eT0iYmFvZGluZyI%3D"        #保定
+cn = "https://fofa.info/result?qbase64=ImlwdHYvbGl2ZS96aF9jbi5qcyIgJiYgY2l0eT0iaGFuZGFuIg%3D%3D"   #邯郸
 
 def process_url(url):
     # 创建一个Chrome WebDriver实例
@@ -29,16 +32,49 @@ def process_url(url):
     # 查找所有符合指定格式的网址
     pattern = r"http://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d+"  # 设置匹配的格式，如http://8.8.8.8:8888
     urls_all = re.findall(pattern, page_content)
-    urls = list(set(urls_all))  # 去重得到唯一的URL列表
-    for url in urls:
+    #urls = list(set(urls_all))  # 去重得到唯一的URL列表
+    urls = set(urls_all)  # 去重得到唯一的URL列表
+    x_urls = []
+    for url in urls: # 对urls进行处理，ip第四位修改为1，并去重
+        url = url.strip()
+        ip_start_index = url.find("//") + 2
+        ip_end_index = url.find(":", ip_start_index)
+        ip_dot_start = url.find(".") + 1
+        ip_dot_second = url.find(".", ip_dot_start) + 1
+        ip_dot_three = url.find(".", ip_dot_second) + 1
+        base_url = url[:ip_start_index]  # http:// or https://
+        ip_address = url[ip_start_index:ip_dot_three]
+        port = url[ip_end_index:]
+        ip_end = "1"
+        modified_ip = f"{ip_address}{ip_end}"
+        x_url = f"{base_url}{modified_ip}{port}"
+        x_urls.append(x_url)
+    urls = set(x_urls) # 去重得到唯一的URL列表
+
+    valid_urls = []
+    #   多线程获取可用url
+    with concurrent.futures.ThreadPoolExecutor(max_workers = 100) as executor:
+        futures = []
+        for url in urls:
+            url = url.strip()
+            modified_urls = modify_urls(url)
+            for modified_url in modified_urls:
+                futures.append(executor.submit(is_url_accessible, modified_url))
+
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            if result:
+                valid_urls.append(result)
+
+    for url in valid_urls:
         print(url)
     # 遍历网址列表，获取JSON文件并解析
     results = []
-    for url in urls:
+    for url in valid_urls:
         try:
-            # 发送GET请求获取JSON文件，设置超时时间为5秒
-            json_url = f"{url}/iptv/live/1000.json?key=txiptv"
-            response = requests.get(json_url, timeout=2)
+            # 发送GET请求获取JSON文件，设置超时时间为0.5秒
+            json_url = f"{url}"
+            response = requests.get(json_url, timeout=0.5)
             json_data = response.json()
 
             try:
@@ -89,11 +125,7 @@ def process_url(url):
                             results.append(f"{name},{urld}")
             except:
                 continue
-        except requests.exceptions.RequestException as e:
-            print(f"Failed to process JSON for URL {json_url}. Error: {str(e)}")
-            continue
-        except json.JSONDecodeError as e:
-            print(f"Failed to parse JSON for URL {url}. Error: {str(e)}")
+        except:
             continue
 
     return results
@@ -103,6 +135,31 @@ def save_results(results, filename):
         for result in results:
             file.write(result + "\n")
             print(result)
+
+def modify_urls(url):
+    modified_urls = []
+    ip_start_index = url.find("//") + 2
+    ip_end_index = url.find(":", ip_start_index)
+    base_url = url[:ip_start_index]  # http:// or https://
+    ip_address = url[ip_start_index:ip_end_index]
+    port = url[ip_end_index:]
+    ip_end = "/iptv/live/1000.json?key=txiptv"
+    for i in range(1, 256):
+        modified_ip = f"{ip_address[:-1]}{i}"
+        modified_url = f"{base_url}{modified_ip}{port}{ip_end}"
+        modified_urls.append(modified_url)
+
+    return modified_urls
+
+def is_url_accessible(url):
+    try:
+        response = requests.get(url, timeout=0.5)
+        if response.status_code == 200:
+            return url
+    except requests.exceptions.RequestException:
+        pass
+
+    return None
 
 # 处理第1个URL
 results_hebei = process_url(hebei)
@@ -122,5 +179,4 @@ for file_path in file_paths:
 
 # 写入合并后的文件
 with open("tv.txt", "w", encoding="utf-8") as output:
-    output.write('\n'.join(file_contents))
-
+    output.write('\n'。join(file_contents))
