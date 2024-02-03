@@ -1,8 +1,8 @@
-name: IPTV Hebei
+name: Daily Tasks
 
 on:
   schedule:
-    - cron: '50 * * * *'
+    - cron: '0 20 * * *'
 
 jobs:
   build:
