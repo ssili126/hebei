@@ -1,3 +1,4 @@
+河北频道,#genre#
 河北农民,https://tv.pull.hebtv.com/jishi/nongminpindao.m3u8?t=2510710360&k=1c19f1e16256d45e9fdcb9b6725647cc
 河北农民,http://81.69.20.196/mqlive.m3u8?ip=120.2.68.35:10000&id=live1020
 河北农民,http://cdn001.tui8.de:9901/tsfile/live/1010_1.m3u8
