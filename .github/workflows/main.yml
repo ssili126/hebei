@@ -2,7 +2,7 @@ name: IPTV Hebei
 
 on:
   schedule:
-    - cron: "0 2 * * *"
+    - cron: "0 3 * * *"
   push:
     branches:
       - main
@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-
     
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -23,7 +21,7 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install selenium requests futures
+        run: pip install selenium requests futures opencv-python eventlet
 
       - name: Install Chrome WebDriver
         run: |
