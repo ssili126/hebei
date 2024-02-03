@@ -1,4 +1,4 @@
-name: Daily Tasks
+name: Daily Task
 
 on:
   schedule:
