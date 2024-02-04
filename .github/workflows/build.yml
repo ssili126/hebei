@@ -23,16 +23,16 @@ jobs:
 
       - name: Build executable
         run: pyinstaller IPTV-hebei.py --onefile --hidden-import=eventlet.hubs.epolls --hidden-import=eventlet.hubs.kqueue --hidden-import=eventlet.hubs.selects --hidden-import=dns --hidden-import=dns.rdtypes --hidden-import=dns.rdtypes.ANY --hidden-import=dns.rdtypes.IN --hidden-import=dns.rdtypes.CH --hidden-import=dns.rdtypes.dnskeybase --hidden-import=dns.asyncbackend --hidden-import=dns.asyncquery --hidden-import=dns.asyncresolver --hidden-import=dns.dnssec --hidden-import=dns.e164 --hidden-import=dns.namedict --hidden-import=dns.tsigkeyring --hidden-import=dns.versioned
-        run: pyinstaller 运行环境检测.py --onefile	
+        run: pyinstaller windows_test.py --onefile	
       #- name: Create directory
       #  run: mkdir -p windows
       - name: Remove existing file
         run: rm windows/IPTV-hebei.exe
-        run: rm windows/运行环境检测.exe
+        run: rm windows/windows_test.exe
 
       - name: Move executable to directory
         run: mv dist/IPTV-hebei.exe windows/
-        run: mv dist/运行环境检测.exe windows/
+        run: mv dist/windows_test.exe windows/
 
       - name: 提交更改
         run: |
