@@ -19,7 +19,7 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install pyinstaller
+        run: pip install pyinstaller selenium requests futures opencv-python eventlet
 
       - name: Build executable
         run: pyinstaller IPTV-hebei.py --onefile --hidden-import=eventlet.hubs.epolls --hidden-import=eventlet.hubs.kqueue --hidden-import=eventlet.hubs.selects --hidden-import=dns --hidden-import=dns.rdtypes --hidden-import=dns.rdtypes.ANY --hidden-import=dns.rdtypes.IN --hidden-import=dns.rdtypes.CH --hidden-import=dns.rdtypes.dnskeybase --hidden-import=dns.asyncbackend --hidden-import=dns.asyncquery --hidden-import=dns.asyncresolver --hidden-import=dns.dnssec --hidden-import=dns.e164 --hidden-import=dns.namedict --hidden-import=dns.tsigkeyring --hidden-import=dns.versioned
@@ -30,7 +30,7 @@ jobs:
       - name: Move executable to directory
         run: mv dist/IPTV-hebei.exe windows/
 
-      - name: Commit changes
+      - name: 提交更改
         run: |
           git config --global user.name "ssili126"
           git config --global user.email "ssili@126.com"
