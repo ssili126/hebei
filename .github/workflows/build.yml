@@ -26,9 +26,10 @@ jobs:
 
       #- name: Create directory
       #  run: mkdir -p windows
-
+      - name: Remove existing file
+        run: rm windows/IPTV-hebei.exe
       - name: Move executable to directory
-        run: mv -f dist/IPTV-hebei.exe windows/
+        run: mv dist/IPTV-hebei.exe windows/
 
       - name: 提交更改
         run: |
