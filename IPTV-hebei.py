@@ -336,7 +336,8 @@ with open("itv_all.m3u", 'w', encoding='utf-8') as file:
                 if channel_counters[channel_name] >= result_counter:
                     continue
                 else:
-                    file.write(f"{'#EXTINF:-1 group-title="央视频道"},{channel_name}\n")
+                    file.write("#EXTINF:-1 group-title=""央视频道""")
+                    file.write(f",{channel_name}\n")
                     file.write(f"{channel_url}\n")
                     channel_counters[channel_name] += 1
             else:
