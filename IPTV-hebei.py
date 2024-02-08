@@ -186,7 +186,7 @@ for result in results:
     line = result.strip()
     if line:
         #channel_name,channel_url = line.split(',')
-        channel_name,channel_url=line
+        channel_name,channel_url=line.split(',')
         channels.append((channel_name,channel_url))
 
 # 线程安全的队列，用于存储下载任务
