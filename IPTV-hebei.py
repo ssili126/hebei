@@ -173,6 +173,7 @@ for url in urls:
                             name = name.replace("CCTV5+体育赛视", "CCTV5+")
                             name = name.replace("CCTV5+体育赛事", "CCTV5+")
                             name = name.replace("CCTV5+体育", "CCTV5+")
+                            urld = urld.replace(",", "!")
                             results.append(f"{name},{urld}")
             except:
                 continue
