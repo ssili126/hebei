@@ -269,8 +269,8 @@ def channel_key(channel_name):
 # 对频道进行排序
 results.sort(key=lambda x: (x[0], -float(x[2].split()[0])))
 results.sort(key=lambda x: channel_key(x[0]))
-now = datetime.datetime.now()
-now_date = now.strftime("%Y年%m月%d日")
+now_today = datetime.date.today()
+#now_date = now.strftime("%Y年%m月%d日")
 # 将结果写入文件
 with open("itv_all_results.txt", 'w', encoding='utf-8') as file:
     for result in results:
@@ -287,7 +287,7 @@ result_counter = 8  # 每个频道需要的个数
 
 with open("itv_all.txt", 'w', encoding='utf-8') as file:
     channel_counters = {}
-    file.write(f"{now_date},#genre#\n")
+    file.write(f"{now_today}更新,#genre#\n")
     file.write('央视频道,#genre#\n')
     for result in results:
         channel_name, channel_url, speed = result
