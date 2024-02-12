@@ -287,7 +287,7 @@ result_counter = 8  # 每个频道需要的个数
 
 with open("itv_all.txt", 'w', encoding='utf-8') as file:
     channel_counters = {}
-    file.write(f"{now_date},#genre#\n")3
+    file.write(f"{now_date},#genre#\n")
     file.write('央视频道,#genre#\n')
     for result in results:
         channel_name, channel_url, speed = result
