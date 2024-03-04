@@ -4,3 +4,20 @@ docker save -o itvall itvall
 docker run -v ./apps:/app itvall
 docker tag itvall liuxipo/itvall:latest
 docker push liuxipo/itvall:latest
+docker pull liuxipo/itvall:latest
+
+OpenWrt 中设置每天早上 4:00 自动运行 Docker 镜像的步骤：
+
+确保你的 OpenWrt 设备已安装 cron。如果尚未安装，可以使用以下命令进行安装：
+opkg update
+opkg install cron
+
+编辑 cron 的配置文件。在终端中运行以下命令来编辑配置文件：
+crontab -e
+
+在编辑器中，添加以下行来设置每天早上 4:00 运行 Docker 镜像的 cron 作业：
+0 4 * * * docker run -v /iptv:/app my_container
+
+上述行中的 docker run -v /iptv:/app my_container 是运行 Docker 镜像的命令。确保替换为你自己的镜像名称和相关参数。
+
+保存并关闭文件。cron 将自动加载新的配置。
