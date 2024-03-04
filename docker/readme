@@ -2,3 +2,5 @@ docker
 docker build -t itvall .
 docker save -o itvall itvall
 docker run -v ./apps:/app itvall
+docker tag itvall liuxipo/itvall:latest
+docker push liuxipo/itvall:latest
