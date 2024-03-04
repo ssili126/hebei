@@ -21,3 +21,5 @@ crontab -e
 上述行中的 docker run -v /iptv:/app my_container 是运行 Docker 镜像的命令。确保替换为你自己的镜像名称和相关参数。
 
 保存并关闭文件。cron 将自动加载新的配置。
+复制文件：
+cp -f /app/itvlist.txt /destination_directory/destination_file
