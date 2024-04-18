@@ -27,3 +27,6 @@
 任丘文娱,https://jwcdnqx.hebyun.com.cn/live/rqtv2/1500k/tzwj_video.m3u8
 2024河北戏曲晚会,https://video.cmc.hebtv.com/0/0d91d6cfb98f5b206ac1e752757fc5a9/2024/02/02/e008708d93604853b9cb608783b69b6a/e008708d93604853b9cb608783b69b6a_1080p.mp4
 深圳都市,http://livepull-tcyzb.sztv.com.cn/live/dushi01.m3u8
+
+凤凰卫视,http://play-flive.ifeng.com/live/06OLEGEGM4G.m3u8
+凤凰资讯,http://play-flive.ifeng.com/live/06OLEEWQKN4.m3u8
