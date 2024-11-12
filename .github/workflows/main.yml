@@ -1,11 +1,11 @@
 name: IPTV Hebei
 
-on:
-  schedule:
-    - cron: '0 20 * * *' #早上2点
-  push:
-    branches:
-      - main
+#on:
+#  schedule:
+#    - cron: '0 20 * * *' #早上2点
+#  push:
+#    branches:
+#      - main
 
 jobs:
   build:
